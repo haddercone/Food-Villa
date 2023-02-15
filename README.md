@@ -1,4 +1,13 @@
-# Coding Assignment
+### Food Villa:
 
-- Practice making a store, slices and do read and write operations using Redux Store
-- Build Cart Flow using Redux Store
+## Food Villa is a Swiggy clone create with:
+- React
+- Redux
+- Tailwind
+- React router dom
+
+## Features:
+- Searching restaurants
+- Add food items to cart
+- Routing
+- Responsive
