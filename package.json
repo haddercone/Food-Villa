@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/haddercone/Namaste-React#readme",
   "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "cssnano": "^5.1.14",
     "parcel": "^2.8.2",
     "postcss": "^8.4.21",
     "process": "^0.11.10",
