@@ -1,4 +1,4 @@
-### Food Villa:
+# Food Villa:
 
 ## Food Villa is a Swiggy clone create with:
 - React
