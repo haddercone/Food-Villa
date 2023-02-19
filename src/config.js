@@ -3,7 +3,7 @@ export const IMAGE_CDN_URL =
 export const CROUSEL_IMAGE_CDN_URL =
   "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/";
 export const RESTAURANT_MENU_URL =
-  "https://food-villa-server.vercel.app//api/restaurant/menu?lat=27.8973944&lng=78.0880129&menuId=";
+  "https://food-villa-server.vercel.app/api/restaurant/menu?lat=27.8973944&lng=78.0880129&menuId=";
 export const SWIGGY_RESTAURANT_CDN_URL =
   "https://food-villa-server.vercel.app/api/restaurants?lat=27.8973944&lng=78.0880129&page_type=DESKTOP_WEB_LISTING";
 export const SITE_LOGO =
