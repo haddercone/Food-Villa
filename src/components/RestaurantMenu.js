@@ -28,23 +28,23 @@ const RestaurantMenu = () => {
     <>
       {/* #3C4852  primary - #174d44*/}
       <div className="bg-[#3C4852] text-white py-8 mb-5">
-        <div className="m-auto w-4/5 flex justify-evenly items-center gap-5">
+        <div className="m-auto w-4/5 md:flex justify-evenly items-center gap-5">
           <div>
             <img
-              className="w-96"
+              className="md:w-96"
               src={IMAGE_CDN_URL + res?.cloudinaryImageId}
             />
           </div>
 
-          <div className="w-1/3">
-            <div className="text-3xl pb-2">{res?.name}</div>
+          <div className="md:w-1/3 ">
+            <div className="text-3xl pb-2 mt-2 md:mt-0">{res?.name}</div>
             <div className="text-xl pb-2">{res?.cuisines.join(",")}</div>
             <div className="pb-2">{res?.locality}</div>
-            <div className="flex gap-2 ">
-              <div className="border-r-2 p-2">
+            <div className="flex gap-2 justify-between  md:flex-row   md:justify-start text-xl mb-2 md:mb-0">
+              <div className="p-2">
                 <FontAwesomeIcon icon={faStar} /> {res?.avgRatingString}
               </div>
-              <div className="border-r-2 p-2">
+              <div className="p-2">
                 {" "}
                 <FontAwesomeIcon icon={faStopwatch} /> {res?.sla?.slaString}
               </div>
@@ -54,8 +54,8 @@ const RestaurantMenu = () => {
             </div>
           </div>
 
-          <div className="border-2 border-white p-5 text-xl relative">
-            <p className="absolute top-[-24px] p-2 translate-x-[-10px] bg-[#3C4852]">
+          <div className="border-2 border-white md:p-5 p-2 border-dashed md:border-solid text-xl relative bg-gray-900 sm:bg-[#3C4852] ">
+            <p className="md:absolute top-[-24px] md:p-2 md:translate-x-[-10px] bg-gray-900  sm:bg-[#3C4852]">
               Offers :{" "}
             </p>
             <p>{res?.aggregatedDiscountInfo?.descriptionList[0].meta} </p>
@@ -73,7 +73,7 @@ const RestaurantMenu = () => {
           <div className="m-auto w-3/5" key={item.id}>
             {item?.cloudinaryImageId === "" ||
             !item?.cloudinaryImageId ? null : (
-              <div className="flex gap-5 justify-between p-5 mb-5 shadow-md items-center">
+              <div className="flex gap-5  flex-col-reverse md:flex-row justify-between p-5 mb-5 shadow-md items-center ">
                 <div className="w-3/4">
                   <p className="text-xl font-bold pb-2">{item?.name}</p>
                   <p className="font-bold pb-2">
@@ -89,7 +89,7 @@ const RestaurantMenu = () => {
                 </div>
                 <div className="">
                   <img
-                    className="w-52"
+                    className="md:w-52 "
                     src={IMAGE_CDN_URL + item?.cloudinaryImageId}
                   />
                 </div>
