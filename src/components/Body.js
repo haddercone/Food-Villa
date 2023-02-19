@@ -1,29 +1,28 @@
 import RestrauntCard from "./RestrauntCard";
 import { Link } from "react-router-dom";
 import useRestaurantList from "../utils/useRestaurantList";
-import Crousel from "./Crousel";
 import Search from "./Search";
 import Shimmer from "./Shimmer";
 
+
 const Body = () => {
-  const [restaurants, actualData, crouselCards, isLoaded, setRestaurants] =
-    useRestaurantList();
+  const [restaurants, actualData,  setRestaurants, loading] = useRestaurantList();
   return (
     <>
-      {/* <Crousel crouselCards={crouselCards} /> */}
+
       <Search
         restaurants={restaurants}
         actualData={actualData}
         setRestaurants={setRestaurants}
       />
 
-      {!isLoaded ? (
+      {loading ? (
         <Shimmer />
       ) : (
         <div>
           <div className="m-0 w-full md:m-auto md:w-4/5 flex flex-wrap gap-6 justify-evenly">
-            {restaurants.length == 0 ? (
-              <p className="text-center w-full text-3xl">
+            {restaurants.length === 0 ? (
+              <p className="text-center w-full text-3xl my-5">
                 No restaurant found...
               </p>
             ) : (
