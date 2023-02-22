@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { filteredRestaurants } from "../utils/helpers";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Search = ({ restaurants, actualData, setRestaurants }) => {
 	const [searchText, setSearchText] = useState("");
@@ -27,15 +27,14 @@ const Search = ({ restaurants, actualData, setRestaurants }) => {
 	const handleOnchange = (e) => {
 		setSearchText(e.target.value);
 	};
-  const handelOnBlur = () => {
-    const timer = setTimeout(() => {
-      // console.log("timer started");
-      setSuggestions([])
-      clearTimeout(timer)
-      // console.log("timer stopped");
-    },300)
-
-  }
+	const handelOnBlur = () => {
+		const timer = setTimeout(() => {
+			// console.log("timer started");
+			setSuggestions([]);
+			clearTimeout(timer);
+			// console.log("timer stopped");
+		}, 300);
+	};
 	return (
 		<div className="bg-search-bg bg-gray-900 mb-5">
 			<div className="w-full m-0 md:w-4/5 md:m-auto py-3 flex h-64 justify-evenly items-center flex-col md:flex-row">
@@ -53,22 +52,24 @@ const Search = ({ restaurants, actualData, setRestaurants }) => {
 						placeholder="Search restaurants.."
 						autoFocus={true}
 						onChange={handleOnchange}
-            onBlur ={handelOnBlur}
+						onBlur={handelOnBlur}
 						value={searchText}
 					/>
 					<div className=" bg-white absolute md:w-full w-4/5 mx-2 md:mx-0 ">
 						{suggestions &&
 							suggestions.map((suggestion) => {
 								return (
-                  <button key={suggestion?.data?.id} className ="w-full text-start p-2 hover:bg-gray-300" >
-                    <Link to={"/restaurant/" + suggestion?.data?.id }>
-                      <p>{suggestion?.data?.name}</p>
-                    </Link>
-                  </button>
+									<button
+										key={suggestion?.data?.id}
+										className="w-full text-start p-2 hover:bg-gray-300"
+									>
+										<Link to={"/restaurant/" + suggestion?.data?.id}>
+											<p>{suggestion?.data?.name}</p>
+										</Link>
+									</button>
 								);
 							})}
 					</div>
-					
 				</form>
 			</div>
 		</div>
