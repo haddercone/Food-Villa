@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 // import UserContext from "../utils/UserContext";
 import { useSelector, useDispatch } from "react-redux";
-import { toggle } from "../utils/LoginSlice";
+import { toggle } from "../utils/loginSlice";
 
 const Head = () => {
 	const [isLogged, setIsLogged] = useState(false);
