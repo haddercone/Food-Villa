@@ -32,7 +32,8 @@ const Login = () => {
 		},
 	});
 	return (
-		<form
+		<div className="bg-white absolute right-0 w-1/3 h-[90vh] flex justify-center items-center">
+			<form
 			onSubmit={formik.handleSubmit}
 			className=" px-3 py-2 h-2/4 md:w-3/4 shadow-lg"
 		>
@@ -77,6 +78,7 @@ const Login = () => {
 				Submit
 			</button>
 		</form>
+		</div>
 	);
 };
 export default Login;

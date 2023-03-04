@@ -15,12 +15,12 @@ const RestrauntCard = ({
 }) => {
   // const { user } = useContext(UserContext);
   return (
-    <div className=" p-4 w-72  ">
+    <div className=" p-4 w-64  ">
       <div>
         <img src={IMAGE_CDN_URL + cloudinaryImageId} />
         <div className="pt-3 text-lg font-bold">{name}</div>
-        <p className="text-lg text-gray-900 py-3">{cuisines.join(", ")}</p>
-        <div className="flex justify-between font-bold">
+        <p className="text-sm text-gray-900 py-3">{cuisines.join(", ")}</p>
+        <div className="flex justify-between text-sm font-bold">
           <span
             className={
               (avgRating < 3.7 || avgRating == "--"

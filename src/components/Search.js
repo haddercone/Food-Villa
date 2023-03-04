@@ -29,10 +29,9 @@ const Search = ({ restaurants, actualData, setRestaurants }) => {
 	};
 	const handelOnBlur = () => {
 		const timer = setTimeout(() => {
-			// console.log("timer started");
 			setSuggestions([]);
 			clearTimeout(timer);
-			// console.log("timer stopped");
+
 		}, 300);
 	};
 	return (
@@ -63,8 +62,8 @@ const Search = ({ restaurants, actualData, setRestaurants }) => {
 										key={suggestion?.data?.id}
 										className="w-full text-start p-2 hover:bg-gray-300"
 									>
-										<Link to={"/restaurant/" + suggestion?.data?.id}>
-											<p>{suggestion?.data?.name}</p>
+										<Link to={"/restaurant/" + suggestion?.data.data?.id}>
+											<p>{suggestion?.data?.data?.name}</p>
 										</Link>
 									</button>
 								);

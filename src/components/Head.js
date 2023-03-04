@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 // import UserContext from "../utils/UserContext";
 import { useSelector, useDispatch } from "react-redux";
-import { toggle } from "../utils/loginSlice";
+import Login from "./Login";
 
 const Head = () => {
 	const [isLogged, setIsLogged] = useState(false);
@@ -14,13 +14,14 @@ const Head = () => {
 	const isOnline = useOnline();
 	// const { user } = useContext(UserContext);
 	const cartItems = useSelector((store) => store.cart.items);
+	const [visible, setVisible] = useState(false)
 	const dispatch = useDispatch();
 	return (
 		<header className="sticky top-0 bg-white z-10 shadow-md">
 			<div className="p-3 w-full m-0 md:m-auto md:w-4/5  flex justify-between items-center">
 				<Title />
 
-				<ul className="fixed bottom-0 flex p-2  justify-around bg-white left-0 w-full  md:flex md:justify-between md:gap-5 md:text-xl md:static md:w-auto ">
+				<ul className="fixed bottom-0 flex p-2  justify-around bg-white left-0 w-full  md:flex md:justify-between md:gap-5  md:static md:w-auto ">
 					<Link to="/">
 						<li className="px-3 py-2">Home</li>
 					</Link>
@@ -37,7 +38,7 @@ const Head = () => {
 					</Link>
 				</ul>
 
-				<ul className="h-full flex justify-between gap-5 text-xl items-center ">
+				<ul className="h-full flex justify-between gap-5  items-center ">
 					<Link to="/cart">
 						<li className="px-3 py-2  text-gray-700 relative text-2xl">
 							<FontAwesomeIcon icon={faCartShopping} />
@@ -56,13 +57,17 @@ const Head = () => {
 									: { backgroundColor: "gray" }
 							}
 						></div>
-						<button className="w-auto " onClick={() => dispatch(toggle())}>
+						<button className="w-auto " onClick={() => setVisible(!visible)}>
 							{isLogged ? "Logout" : "Login"}
 						</button>
 					</li>
 					{/* <p className="text-xl">{user.name}</p> */}
 				</ul>
+				
 			</div>
+			
+			{visible && <Login /> }
+			
 		</header>
 	);
 };

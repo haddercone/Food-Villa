@@ -3,23 +3,25 @@ import { Link } from "react-router-dom";
 import useRestaurantList from "../utils/useRestaurantList";
 import Search from "./Search";
 import Shimmer from "./Shimmer";
-import Login from "./Login";
-import { useSelector } from "react-redux";
-
+import { useRef, useCallback } from "react";
 const Body = () => {
 	const [restaurants, actualData, setRestaurants, loading] =
 		useRestaurantList();
-	const visible = useSelector((store) => store.login.visible);
+	const observer = useRef();
+	const lastElement = useCallback((node) => {
+		if (loading) return;
+		if(observer.current) observer.current.disconnect()
+		observer.current = new IntersectionObserver(entries => {
+			if(entries[0].isIntersecting){
+				console.log("last element");
+			}
+		});
+		if (node) observer.current.observe(node)
+	});
+	// observer.current = restaurants.length;
+	// console.log(observer.current);
 	return (
 		<>
-			{!visible ? null : (
-				<div className="w-screen h-screen fixed  bg-gray-900 bg-opacity-50  left-0 right-0 z-10 overscroll-none overflow-y-none">
-					<div className="fixed bg-white bottom-0 w-full  md:w-1/3 top-24 right-0 z-10 flex justify-center  items-center ">
-						<Login />
-					</div>
-				</div>
-			)}
-
 			<Search
 				restaurants={restaurants}
 				actualData={actualData}
@@ -36,17 +38,35 @@ const Body = () => {
 								No restaurant found...
 							</p>
 						) : (
-							restaurants.map((restaurant) => {
-								return (
-									<Link
-										key={restaurant.data.id}
-										to={"/restaurant/" + restaurant.data.id}
-									>
-										<div className="border-transparent h-full hover:scale-110 transition duration-0 hover:duration-450">
-											<RestrauntCard {...restaurant.data} />
-										</div>
-									</Link>
-								);
+							restaurants.map((restaurant, index) => {
+								{
+									if (restaurants.length === index + 1) {
+										return (
+											<Link
+												key={restaurant?.data?.data?.id}
+												to={"/restaurant/" + restaurant.data.data.id}
+											>
+												<div
+													ref={lastElement}
+													className="border-transparent h-full hover:scale-110 transition duration-0 hover:duration-450"
+												>
+													<RestrauntCard {...restaurant?.data?.data} />
+												</div>
+											</Link>
+										);
+									} else {
+										return (
+											<Link
+												key={restaurant?.data?.data?.id}
+												to={"/restaurant/" + restaurant.data.data.id}
+											>
+												<div className="border-transparent h-full hover:scale-110 transition duration-0 hover:duration-450">
+													<RestrauntCard {...restaurant?.data?.data} />
+												</div>
+											</Link>
+										);
+									}
+								}
 							})
 						)}
 					</div>

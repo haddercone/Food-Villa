@@ -10,8 +10,9 @@ const useRestaurantList = () => {
     try {
       const data = await fetch(SWIGGY_RESTAURANT_CDN_URL);
       const json = await data.json();
-      setRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-      setActualData(json?.data?.cards[2]?.data?.data?.cards);
+      setRestaurants(json?.data?.cards);
+      setActualData(json?.data?.cards);
+      console.log(json?.data?.cards);
       setIsLoading(false)
     } catch (error) {
       console.log(error);
@@ -25,4 +26,4 @@ const useRestaurantList = () => {
   return [restaurants, actualData, setRestaurants, loading];
 };
 
-export default useRestaurantList;
+export default useRestaurantList; 

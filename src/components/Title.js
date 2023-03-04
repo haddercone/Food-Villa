@@ -3,7 +3,7 @@ import { SITE_LOGO } from "../config";
 const Title = () => (
   <Link to="/">
     <img
-      className="w-20 min-w-[5rem] rounded-full"
+      className=" min-w-[3rem] w-12 rounded-full"
       alt="logo"
       src={SITE_LOGO}
     />
