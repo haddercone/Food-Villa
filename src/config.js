@@ -1,9 +1,11 @@
 export const IMAGE_CDN_URL =
   "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
+export const MENU_IMAGE_ITEM_URL ="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/"
 export const CROUSEL_IMAGE_CDN_URL =
   "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/";
-export const RESTAURANT_MENU_URL =
-  "https://food-villa-server.vercel.app/api/restaurant/menu?lat=27.8973944&lng=78.0880129&menuId=";
+export const RESTAURANT_MENU_URL = 
+"https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=27.8973944&lng=78.0880129&restaurantId="
+  // "https://food-villa-server.vercel.app/api/restaurant/menu?lat=27.8973944&lng=78.0880129&menuId=";
 export const SWIGGY_RESTAURANT_CDN_URL = 
 "https://food-villa-server.vercel.app/api/restaurants?lat=27.8973944&lng=78.0880129&offset=15&sortBy=RELEVANCE&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING"
 

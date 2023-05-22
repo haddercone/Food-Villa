@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { IMAGE_CDN_URL } from "../config";
+import { MENU_IMAGE_ITEM_URL } from "../config";
 import { incrementItem, decrementItem, clearCart } from "../utils/cartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -25,22 +25,23 @@ const Cart = () => {
         )}
         <hr className="my-2 border-gray-200 border-2" />
         {cartItems.map((item) => {
+          const {name, imageId, price, } = item?.card?.info;
           return (
             <div
-              key={item?.id}
+              key={item?.card?.info?.id}
               className="flex flex-wrap gap-5  my-2 items-center shadow-lg rounded-lg p-2"
             >
               <img
                 className="md:w-1/3 h-full"
-                src={IMAGE_CDN_URL + item?.cloudinaryImageId}
+                src={MENU_IMAGE_ITEM_URL + imageId}
               />
               <div className="md:w-1/3 text-md ">
-                <p className="font-bold">{item?.name}</p>
+                <p className="font-bold">{name}</p>
 
-                <p className="">Rs. {(item?.price / 100).toFixed(2)} </p>
+                <p className="">Rs. {(price / 100).toFixed(2)} </p>
                 <p className="my-2 font-bold text-lg">
                   Total price:{" "}
-                  {((item.itemCount * item?.price) / 100).toFixed(2)}
+                  {((item.itemCount * price) / 100).toFixed(2)}
                 </p>
               </div>
               <div>
@@ -69,7 +70,7 @@ const Cart = () => {
             Total price: Rs.{" "}
             {cartItems.length &&
               cartItems
-                .map((item) => (item.itemCount * item?.price) / 100)
+                .map((item) => (item.itemCount * item?.card?.info?.price) / 100)
                 .reduce((acc, curr) => acc + curr, 0)
                 .toFixed(2)}
           </p>

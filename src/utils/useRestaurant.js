@@ -14,7 +14,8 @@ const useRestaurant = () => {
   async function getRestaurantInfo() {
     const data = await fetch(RESTAURANT_MENU_URL + resId);
     const json = await data.json();
-    setRes(json?.data);
+    // console.log(json?.data.cards);
+    setRes(json?.data?.cards);
     setIsLoaded(true);
   }
   return [res, isLoaded];

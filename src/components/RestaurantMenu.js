@@ -1,105 +1,83 @@
-import { IMAGE_CDN_URL } from "../config";
-import Shimmer from "./Shimmer";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MENU_IMAGE_ITEM_URL } from "../config";
 import { Link } from "react-router-dom";
 import MenuShimmer from "./MenuShimmer";
-import {
-	faStar,
-	faStopwatch,
-	faMoneyBill,
-} from "@fortawesome/free-solid-svg-icons";
 import useRestaurant from "../utils/useRestaurant";
 import { addItem } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
+import RestaurantProfile from "./RestaurantProfile";
+
 
 const RestaurantMenu = () => {
-	const [res, isLoaded] = useRestaurant();
+  const [res, isLoaded] = useRestaurant();
+  const restaurantProfileData = res[0]?.card?.card?.info;
+  const menuData = res[2]?.groupedCard?.cardGroupMap?.REGULAR.cards;
+  const dispatch = useDispatch();
 
-	const dispatch = useDispatch();
+  const handleAdditems = (item) => {
+    dispatch(addItem(item));
+  };
+  if (!res) return null;
 
-	const handleAdditems = (item) => {
-		dispatch(addItem(item));
-	};
-	if (!res) return null;
+  return !isLoaded ? (
+    <MenuShimmer />
+  ) : (
+    <>
+      {/* {console.log(res[2]?.groupedCard?.cardGroupMap?.REGULAR.cards)} */}
+      <RestaurantProfile {...restaurantProfileData} />
+      {console.log(menuData)}
+      {menuData.map((menu) => {
+        const menuCard = menu?.card?.card;
+        const title = menu.card?.card?.title;
+        const items = menu?.card?.card?.itemCards;
 
-	return !isLoaded ? (
-		<MenuShimmer />
-	) : (
-		<>
-			{/* #3C4852  primary - #174d44*/}
-			<div className="bg-[#3C4852] text-white py-8 mb-5">
-				<div className="m-auto w-4/5 md:flex justify-evenly items-center gap-5">
-					<div>
-						<img
-							className="md:w-96"
-							src={IMAGE_CDN_URL + res?.cloudinaryImageId}
-						/>
-					</div>
+        return (
+          <div className="w-3/5 m-auto text-xl">
+            {!menuCard?.title ? null : (
+              <div
+                className=" font-bold my-4 px-2 py-4 border-2 border-gray-400"
+                key={title}
+              >
+                {title}
+              </div>
+            )}
 
-					<div className="md:w-1/3 ">
-						<div className="text-3xl pb-2 mt-2 md:mt-0">{res?.name}</div>
-						<div className="text-xl pb-2">{res?.cuisines.join(",")}</div>
-						<div className="pb-2">{res?.locality}</div>
-						<div className="flex gap-2 justify-between  md:flex-row   md:justify-start text-xl mb-2 md:mb-0">
-							<div className="p-2">
-								<FontAwesomeIcon icon={faStar} /> {res?.avgRatingString}
-							</div>
-							<div className="p-2">
-								{" "}
-								<FontAwesomeIcon icon={faStopwatch} /> {res?.sla?.slaString}
-							</div>
-							<div className=" p-2">
-								<FontAwesomeIcon icon={faMoneyBill} /> {res?.costForTwoMsg}
-							</div>
-						</div>
-					</div>
-
-					<div className="border-2 border-white md:p-5 p-2 border-dashed md:border-solid text-xl relative bg-gray-900 sm:bg-[#3C4852] ">
-						<p className="md:absolute top-[-24px] md:p-2 md:translate-x-[-10px] bg-gray-900  sm:bg-[#3C4852]">
-							Offers :{" "}
-						</p>
-						<p>{res?.aggregatedDiscountInfo?.descriptionList[0].meta} </p>
-						<p>{res?.aggregatedDiscountInfo?.descriptionList[1].meta} </p>
-					</div>
-				</div>
-			</div>
-			<nav className="w-3/5 m-auto text-xl ">
-				<button className="border-2 border-black p-2 mb-5">
-					<Link to="/">Home</Link>
-				</button>
-			</nav>
-			{Object.values(res?.menu?.items).map((item) => {
-				return (
-					<div className="m-auto w-3/5" key={item.id}>
-						{item?.cloudinaryImageId === "" ||
-						!item?.cloudinaryImageId ? null : (
-							<div className="flex gap-5  flex-col-reverse md:flex-row justify-between p-5 mb-5 shadow-md items-center ">
-								<div className="w-3/4">
-									<p className="text-xl font-bold pb-2">{item?.name}</p>
-									<p className="font-bold pb-2">
-										₹ {Math.floor(item?.price) / 100}
-									</p>
-									<p className="pb-2">{item?.description}</p>
-									<button
-										onClick={() => handleAdditems(item)}
-										className="border-2 text-white border-white bg-gray-900 px-3 py-2 "
-									>
-										+ Add to cart
-									</button>
-								</div>
-								<div className="">
-									<img
-										className="md:w-52 "
-										src={IMAGE_CDN_URL + item?.cloudinaryImageId}
-									/>
-								</div>
-							</div>
-						)}
-					</div>
-				);
-			})}
-		</>
-	);
+            {!items
+              ? null
+              : items.map((item) => {
+				const {imageId, name, id, price} = item?.card?.info;
+                  return item?.card?.info?.imageId === "" ||
+                  !item?.card?.info?.imageId ? null : (
+                    <div
+                      key={item?.card?.info?.id}
+                      className="flex gap-5  flex-col-reverse md:flex-row justify-between p-5 mb-5 shadow-md items-center "
+                    >
+                      <div className="w-3/4">
+                        <p className="text-xl font-bold pb-2">
+                          {item?.card?.info?.name}
+                        </p>
+                        <p className="font-bold pb-2">
+                          ₹ {Math.floor(item?.card?.info?.price) / 100}
+                        </p>
+                        <p className="pb-2">{item?.card?.info?.description}</p>
+                        <button
+                          onClick={() => handleAdditems(item)}
+                          className="border-2 text-white border-white bg-gray-900 px-3 py-2 "
+                        >
+                          + Add to cart
+                        </button>
+                      </div>
+                      <img
+                        className="md:w-52 "
+                        src={MENU_IMAGE_ITEM_URL + item?.card.info.imageId}
+                      />
+                    </div>
+				  )}
+            )}
+          </div>
+        );
+      })}
+    </>
+  );
 };
 
 export default RestaurantMenu;
