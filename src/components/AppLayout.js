@@ -5,7 +5,7 @@ import { useState } from "react";
 import UserContext from "../utils/UserContext";
 import { Provider } from "react-redux";
 import store from "../utils/store";
-
+import ScrollToTop from "./ScrollToTop";
 const AppLayout = () => {
   const [user, setUser] = useState({
     name: "Robin Singh",
@@ -13,13 +13,17 @@ const AppLayout = () => {
   });
 
   return (
+    <>
+    <ScrollToTop />
     <Provider store={store}>
       <UserContext.Provider value={{ user: user, setUser: setUser }}>
+        
         <Head />
         <Outlet />
         <Footer />
       </UserContext.Provider>
     </Provider>
+    </>
   );
 };
 
