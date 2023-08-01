@@ -10,9 +10,12 @@ const useRestaurantList = () => {
     try {
       const data = await fetch(SWIGGY_RESTAURANT_CDN_URL);
       const json = await data.json();
-      setRestaurants(json?.data?.cards);
-      setActualData(json?.data?.cards);
-      console.log(json?.data?.cards);
+      setRestaurants(
+        json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      )
+      setActualData(
+        json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      )
       setIsLoading(false)
     } catch (error) {
       console.log(error);
