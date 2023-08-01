@@ -62,8 +62,8 @@ const Search = ({ restaurants, actualData, setRestaurants }) => {
 										key={suggestion?.data?.id}
 										className="w-full text-start p-2 hover:bg-gray-300"
 									>
-										<Link to={"/restaurant/" + suggestion?.data.data?.id}>
-											<p>{suggestion?.data?.data?.name}</p>
+										<Link to={"/restaurant/" + suggestion?.info.id}>
+											<p>{suggestion?.info.name}</p>
 										</Link>
 									</button>
 								);
