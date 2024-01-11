@@ -23,9 +23,7 @@ const RestaurantMenu = () => {
     <MenuShimmer />
   ) : (
     <>
-      {/* {console.log(res[2]?.groupedCard?.cardGroupMap?.REGULAR.cards)} */}
       <RestaurantProfile {...restaurantProfileData} />
-      {/* {console.log(menuData)} */}
       {menuData &&
         menuData.map((menu) => {
           const menuCard = menu?.card?.card;

@@ -38,7 +38,7 @@ const Body = () => {
                 No restaurant found...
               </p>
             ) : (
-              restaurants.map((restaurant, index) => {
+              restaurants &&  restaurants.map((restaurant, index) => {
                 {
                   if (restaurants.length === index + 1) {
                     return (
